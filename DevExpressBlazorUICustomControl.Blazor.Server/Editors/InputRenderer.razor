@@ -1,0 +1,111 @@
+﻿@using DevExpressBlazorUICustomControl.Module.BusinessObjects
+@using System.Collections.ObjectModel
+
+
+<DxLoadingPanel @bind-Visible="ShowLoadPanel"
+                IsContentBlocked=true
+                CssClass="w-100"
+                ApplyBackgroundShading="true">
+
+    <DxComboBox Data=@ComponentModel.Data
+                ValueChanged="@((ArticleSearch data) => SelectedArticleChanged(data))"
+                ListRenderMode="ListRenderMode.Virtual"
+                FilteringMode="DataGridFilteringMode.None"
+                TextFieldName="@nameof(ArticleSearch.Description)"
+                DropDownVisibleChanged="@((value) => OnDropDownVisibleChanged(value))"
+                AllowUserInput="!ShowLoadPanel"
+                Enabled="!ShowLoadPanel"
+                DropDownVisible="false"
+                spellcheck="false"
+                CssClass="w-100"
+                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                Id="DxComboBoxContext">
+        <ItemTemplate>
+            <DxGridLayout CssClass="combobox-item-template" style="border: 1px solid;">
+                <Rows>
+                    <DxGridLayoutRow Height="auto" />
+                    <DxGridLayoutRow Height="auto" />
+                </Rows>
+                <Columns>
+                    <DxGridLayoutColumn />
+                </Columns>
+
+                <Items>
+                    @{
+                        var locData = (ArticleSearch)context;
+                    }
+                    <DxGridLayoutItem Row="0" Column="0" ColumnSpan="1" RowSpan="1">
+                        <Template>
+                            <div class="combobox-item-template-text">
+                                <span>Description:</span>
+                                <span>
+                                    @locData.Description
+                                </span>
+                            </div>
+                        </Template>
+                    </DxGridLayoutItem>
+
+                    <DxGridLayoutItem Row="1" Column="0" ColumnSpan="1" RowSpan="1">
+                        <Template>
+                            <div class="combobox-item-template-text">
+                                <span>Price:</span>
+                                <span>
+                                    @locData.Price.ToString("C")
+                                </span>
+                            </div>
+                        </Template>
+                    </DxGridLayoutItem>
+
+
+                </Items>
+            </DxGridLayout>
+        </ItemTemplate>
+
+
+
+
+    </DxComboBox>
+
+</DxLoadingPanel>
+@code {
+    [Parameter]
+    public InputModel ComponentModel { get; set; }
+
+    public static RenderFragment Create(InputModel componentModel) => @<InputRenderer ComponentModel="@componentModel" />;
+
+    private bool ShowLoadPanel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(() =>
+        {
+            ShowLoadPanel = true;
+            System.Threading.Thread.Sleep(1000);
+
+            var locListToShow = new ObservableCollection<ArticleSearch>();
+            locListToShow.Add(new ArticleSearch { Description = "Test 1", Id = 1, Price = 500 });
+            locListToShow.Add(new ArticleSearch { Description = "Test 2", Id = 2, Price = 20 });
+            locListToShow.Add(new ArticleSearch { Description = "Test 3", Id = 3, Price = 700 });
+
+            ComponentModel.Data = locListToShow;
+            ShowLoadPanel = false;
+
+        });
+    }
+
+    private void SelectedArticleChanged(ArticleSearch data)
+    {
+        if (ComponentModel.ValueChanged.HasDelegate)
+            ComponentModel.ValueChanged.InvokeAsync(data);
+
+    }
+
+    private void OnDropDownVisibleChanged(bool visible)
+    {
+        if (visible == false)
+        {
+            StateHasChanged();
+        }
+    }
+
+}

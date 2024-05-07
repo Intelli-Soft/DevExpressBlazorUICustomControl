@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="DevExpressBlazorUICustomControl">
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="ArticleInput_ListView" Removed="True" />
+          <Item Id="ArticleSearch_ListView" ObjectKey="-1" ViewId="ArticleInput_DetailView" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="ArticleInput_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="@e32d9c08-a979-4a5c-8c9d-902325ff1900" ActionContainer="MyCategory" Caption="@e32d9c08-a979-4a5c-8c9d-902325ff1900(9)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutItem Id="ShortSearchList" ShowCaption="False" ViewItem="ShortSearchList" Index="0" RelativeSize="3.1651829871414443" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.308605341246292" Index="1">
+            <LayoutGroup Id="ArticleInput" RelativeSize="100">
+              <LayoutItem Id="Description" RelativeSize="35.714285714285715" />
+              <LayoutItem Id="Price" RelativeSize="28.571428571428573" />
+              <LayoutItem Id="Search" RelativeSize="35.714285714285715" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutItem Id="@e32d9c08-a979-4a5c-8c9d-902325ff1900" ViewItem="@e32d9c08-a979-4a5c-8c9d-902325ff1900" Index="2" RelativeSize="2.5717111770524235" IsNewNode="True" />
+          <TabbedGroup Id="Tabs" Index="3" RelativeSize="85.95450049455984">
+            <LayoutGroup Id="SavedArticles" RelativeSize="100" Index="0">
+              <LayoutItem Id="SavedArticles" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ShortSearchList" Caption="Short Search List" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="ShortSearchList" Removed="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
