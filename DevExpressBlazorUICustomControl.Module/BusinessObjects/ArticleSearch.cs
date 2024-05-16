@@ -1,14 +1,9 @@
-﻿using DevExpress.ExpressApp.Data;
-using DevExpress.ExpressApp.DC;
+﻿using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
-using DevExpress.Xpo;
 using DevExpressBlazorUICustomControl.Module.Helpers;
 using DevExpressBlazorUICustomControl.Module.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevExpressBlazorUICustomControl.Module.BusinessObjects
 {
@@ -35,7 +30,7 @@ namespace DevExpressBlazorUICustomControl.Module.BusinessObjects
             set => SetPropertyValue(nameof(Description), ref myDescription, value);
         }
 
-        
+
         public double Price
         {
             get => myPrice;

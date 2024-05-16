@@ -18,8 +18,7 @@
                 DropDownVisible="false"
                 spellcheck="false"
                 CssClass="w-100"
-                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                Id="DxComboBoxContext">
+                ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto">
         <ItemTemplate>
             <DxGridLayout CssClass="combobox-item-template" style="border: 1px solid;">
                 <Rows>
@@ -66,14 +65,33 @@
 
     </DxComboBox>
 
+    <DxButton Id="@ButtonId" Click="() => IsOpen = true">Show a drop-down window</DxButton>
+    <DxDropDown PositionTarget="@ButtonId"
+                PositionMode="DropDownPositionMode.Bottom"
+                HorizontalOffset="120"
+                VerticalOffset="70"
+                Width="210px"
+                BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                @bind-IsOpen="@IsOpen">
+    </DxDropDown>
+
 </DxLoadingPanel>
 @code {
     [Parameter]
     public InputModel ComponentModel { get; set; }
 
     public static RenderFragment Create(InputModel componentModel) => @<InputRenderer ComponentModel="@componentModel" />;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+            ButtonId = Guid.NewGuid().ToString();
+        base.OnAfterRender(firstRender);
+    }
 
     private bool ShowLoadPanel { get; set; }
+    private bool IsOpen { get; set; } = false;
+
+    private string ButtonId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

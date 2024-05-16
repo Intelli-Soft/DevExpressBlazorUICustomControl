@@ -1,23 +1,13 @@
-﻿using DevExpress.Data.Filtering;
-using DevExpress.ExpressApp;
+﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
-using DevExpress.ExpressApp.Layout;
-using DevExpress.ExpressApp.Model.NodeGenerators;
-using DevExpress.ExpressApp.SystemModule;
-using DevExpress.ExpressApp.Templates;
-using DevExpress.ExpressApp.Utils;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.Validation;
 using DevExpressBlazorUICustomControl.Module.BusinessObjects;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DevExpressBlazorUICustomControl.Module.Controllers
 {
-    
+
     public partial class ArticleInputDetailViewController : ObjectViewController<DetailView, ArticleInput>
     {
         IObjectSpace myObjectSpace = null;
@@ -38,10 +28,10 @@ namespace DevExpressBlazorUICustomControl.Module.Controllers
 
             locCurrentObject.SavedArticles.Add(new ArticleInput
             {
-                Id = locCurrentObject.SavedArticles.Count +1,
+                Id = locCurrentObject.SavedArticles.Count + 1,
                 Price = locCurrentObject.Price,
                 Description = locCurrentObject.Description
-                
+
             });
 
         }
@@ -49,7 +39,7 @@ namespace DevExpressBlazorUICustomControl.Module.Controllers
         protected override void OnActivated()
         {
             base.OnActivated();
-        if (myObjectSpace == null)
+            if (myObjectSpace == null)
             {
                 myObjectSpace = View.ObjectSpace;
                 View.ViewEditMode = ViewEditMode.Edit;
@@ -60,7 +50,7 @@ namespace DevExpressBlazorUICustomControl.Module.Controllers
         private void MyObjectSpace_ObjectChanged(object sender, ObjectChangedEventArgs e)
         {
 
-            if(e.PropertyName == nameof(ArticleInput.Search))
+            if (e.PropertyName == nameof(ArticleInput.Search))
             {
                 myObjectSpace.ObjectChanged -= MyObjectSpace_ObjectChanged;
                 ArticleInput locCurrentObject = e.Object as ArticleInput;
